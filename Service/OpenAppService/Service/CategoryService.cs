@@ -4,31 +4,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+
 namespace Service
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService: ICategoryService
     {
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<Item> GetCategory(int id)
         {
-            return MockCategories();
+            return MockCategory();
         }
-        
-        IEnumerable<Category> MockCategories() {
-            List<Category> CategoryList = new List<Category>();
-            Category cat2 = new Category
+        List<Item> MockCategory()
+        {
+            var item = new Item
             {
-                ID = 1,
-                Title = "Avfall & Återvinning"
+                Title = "Återvinningscentral Hovsta",
+                Desc = "Här ska det stå en beskrivning...",
+                Url = "http://www.orebro.se/305.html",
+                Icon = "http://geodata.orebro.se/images/atervinning_a.jpg",
+                X = "15.34510316130411",
+                Y = "59.255292950802385"
             };
-            
-            Category cat = new Category
+            var item2 = new Item
             {
-                ID = 1,
-                Title = "Resturanger"
+                Title = "Återvinningscentral Atle",
+                Desc = "Här ska det stå en beskrivning...",
+                Url = "http://www.orebro.se/305.html",
+                Icon = "http://geodata.orebro.se/images/atervinning_a.jpg",
+                X = "15.239830446450839",
+                Y = "59.34655600001931"
             };
-            CategoryList.Add(cat2);
-            CategoryList.Add(cat);
-            return CategoryList;
+            var item3 = new Item
+            {
+                Title = "Hundlatriner",
+                Desc = "Här ska det stå en beskrivning...",
+                Url = "http://www.orebro.se/",
+                Icon = "http://www.lansstyrelsen.se/_layouts/LST-Images/Serviceinformation/soptunna.jpg",
+                X = "15.219075135497945",
+                Y = "59.27226251755445"
+            };
+            List<Item> items = new List<Item>();
+            items.Add(item);
+            items.Add(item2);
+            items.Add(item3);
+            return items;
         }
     }
 }

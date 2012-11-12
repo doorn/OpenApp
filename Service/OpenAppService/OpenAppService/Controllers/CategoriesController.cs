@@ -14,9 +14,14 @@ namespace OpenAppService.Controllers
         // GET: api/Categories
         public IEnumerable<object> Get()
         {
-            ICategoryService categoryService = new CategoryService();
-            return categoryService.GetCategories();
+            ICategoryListService categoryListService = new CategoryListService();
+            return categoryListService.GetCategories();
         }
-       
+        // GET api/Categories/5
+        public IEnumerable<object> Get(int id)
+        {
+            ICategoryService categoryService = new CategoryService();
+            return categoryService.GetCategory(id);
+        }
     }
 }

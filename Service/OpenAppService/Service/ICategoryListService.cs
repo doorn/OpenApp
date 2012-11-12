@@ -1,14 +1,14 @@
-﻿using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace Service
 {
-    public interface ICategoryService
+    public interface ICategoryListService
     {
-        IEnumerable<Item> GetCategory(int id);
+        IEnumerable<Category> GetCategories();
     }
 }

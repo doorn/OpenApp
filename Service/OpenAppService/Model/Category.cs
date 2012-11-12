@@ -14,5 +14,7 @@ namespace Model
         public int ID { get; set; }
         [DataMember(Name="title")]
         public string Title { get; set; }
+        [DataMember(Name = "source")]
+        public string Source { get; set; }
     }
 }
