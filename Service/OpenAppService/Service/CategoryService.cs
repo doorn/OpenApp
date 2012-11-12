@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Model;
 namespace Service
 {
-    public class CategoryService: ICategoryService
+    public class CategoryService : ICategoryService
     {
         public IEnumerable<Category> GetCategories()
         {
             return MockCategories();
         }
+        
         IEnumerable<Category> MockCategories() {
             List<Category> CategoryList = new List<Category>();
             Category cat2 = new Category
