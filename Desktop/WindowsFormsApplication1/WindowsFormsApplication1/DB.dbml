@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OpenApp" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WIN8\SQLEXPRESS;Initial Catalog=OpenApp;Persist Security Info=True;User ID=sa" SettingsObjectName="WindowsFormsApplication1.Properties.Settings" SettingsPropertyName="OpenAppConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApiUrl" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Category_CategoryContent" Member="CategoryContents" ThisKey="Id" OtherKey="CatId" Type="CategoryContent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoryContent" Member="CategoryContents">
+    <Type Name="CategoryContent">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApiUrl" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="CatId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Category_CategoryContent" Member="Category" ThisKey="CatId" OtherKey="Id" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

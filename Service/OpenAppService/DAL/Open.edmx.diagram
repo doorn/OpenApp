@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a524e8d967394f59880015bd082687bd" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="OpenAppModel.Category" Width="1.5" PointX="10.149810890736902" PointY="21.719830761533153" />
+        <EntityTypeShape EntityType="OpenAppModel.CategoryContent" Width="1.5" PointX="1.9979974506413551" PointY="16.737416215584343" />
+        <AssociationConnector Association="OpenAppModel.FK_CategoryContent_Category" />
+        <EntityTypeShape EntityType="OpenAppModel.Icon" Width="1.5" PointX="9" PointY="15.125" />
+        <EntityTypeShape EntityType="OpenAppModel.Schema" Width="1.5" PointX="12" PointY="16.625" />
+        <EntityTypeShape EntityType="OpenAppModel.SchemaContent" Width="1.5" PointX="15" PointY="18.125" />
+        <AssociationConnector Association="OpenAppModel.FK_Category_Schema" />
+        <AssociationConnector Association="OpenAppModel.FK_CategoryContent_Icon" />
+        <AssociationConnector Association="OpenAppModel.FK_CategoryContent_SchemaContent" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

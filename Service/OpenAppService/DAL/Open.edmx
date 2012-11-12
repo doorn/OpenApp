@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OpenAppModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="OpenAppModelStoreContainer">
+          <EntitySet Name="Category" EntityType="OpenAppModel.Store.Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoryContent" EntityType="OpenAppModel.Store.CategoryContent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Icon" EntityType="OpenAppModel.Store.Icon" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Schema" EntityType="OpenAppModel.Store.Schema" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SchemaContent" EntityType="OpenAppModel.Store.SchemaContent" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Category_Schema" Association="OpenAppModel.Store.FK_Category_Schema">
+            <End Role="Schema" EntitySet="Schema" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryContent_Category" Association="OpenAppModel.Store.FK_CategoryContent_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryContent_Icon" Association="OpenAppModel.Store.FK_CategoryContent_Icon">
+            <End Role="Icon" EntitySet="Icon" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryContent_SchemaContent" Association="OpenAppModel.Store.FK_CategoryContent_SchemaContent">
+            <End Role="SchemaContent" EntitySet="SchemaContent" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ApiUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="SchemaId" Type="int" />
+        </EntityType>
+        <EntityType Name="CategoryContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ApiUrl" Type="varchar(max)" Nullable="false" />
+          <Property Name="CatId" Type="int" Nullable="false" />
+          <Property Name="IconId" Type="int" />
+          <Property Name="SchemaContentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Icon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IconUrl" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SchemaContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TitleTag" Type="varchar" MaxLength="100" />
+          <Property Name="DescTag" Type="varchar" MaxLength="100" />
+          <Property Name="UrlTag" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Category_Schema">
+          <End Role="Schema" Type="OpenAppModel.Store.Schema" Multiplicity="0..1" />
+          <End Role="Category" Type="OpenAppModel.Store.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="SchemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryContent_Category">
+          <End Role="Category" Type="OpenAppModel.Store.Category" Multiplicity="1" />
+          <End Role="CategoryContent" Type="OpenAppModel.Store.CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryContent_Icon">
+          <End Role="Icon" Type="OpenAppModel.Store.Icon" Multiplicity="0..1" />
+          <End Role="CategoryContent" Type="OpenAppModel.Store.CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Icon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="IconId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryContent_SchemaContent">
+          <End Role="SchemaContent" Type="OpenAppModel.Store.SchemaContent" Multiplicity="0..1" />
+          <End Role="CategoryContent" Type="OpenAppModel.Store.CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchemaContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="SchemaContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpenAppModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OpenAppEntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="OpenAppModel.Category" />
+          <EntitySet Name="CategoryContent" EntityType="OpenAppModel.CategoryContent" />
+          <AssociationSet Name="FK_CategoryContent_Category" Association="OpenAppModel.FK_CategoryContent_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+          <EntitySet Name="Icon" EntityType="OpenAppModel.Icon" />
+          <EntitySet Name="Schema" EntityType="OpenAppModel.Schema" />
+          <EntitySet Name="SchemaContent" EntityType="OpenAppModel.SchemaContent" />
+          <AssociationSet Name="FK_Category_Schema" Association="OpenAppModel.FK_Category_Schema">
+            <End Role="Schema" EntitySet="Schema" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryContent_Icon" Association="OpenAppModel.FK_CategoryContent_Icon">
+            <End Role="Icon" EntitySet="Icon" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryContent_SchemaContent" Association="OpenAppModel.FK_CategoryContent_SchemaContent">
+            <End Role="SchemaContent" EntitySet="SchemaContent" />
+            <End Role="CategoryContent" EntitySet="CategoryContent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApiUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoryContent" Relationship="OpenAppModel.FK_CategoryContent_Category" FromRole="Category" ToRole="CategoryContent" />
+          <Property Type="Int32" Name="SchemaId" />
+          <NavigationProperty Name="Schema" Relationship="OpenAppModel.FK_Category_Schema" FromRole="Category" ToRole="Schema" />
+        </EntityType>
+        <EntityType Name="CategoryContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApiUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CatId" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="OpenAppModel.FK_CategoryContent_Category" FromRole="CategoryContent" ToRole="Category" />
+          <Property Type="Int32" Name="IconId" />
+          <Property Type="Int32" Name="SchemaContentId" />
+          <NavigationProperty Name="Icon" Relationship="OpenAppModel.FK_CategoryContent_Icon" FromRole="CategoryContent" ToRole="Icon" />
+          <NavigationProperty Name="SchemaContent" Relationship="OpenAppModel.FK_CategoryContent_SchemaContent" FromRole="CategoryContent" ToRole="SchemaContent" />
+        </EntityType>
+        <Association Name="FK_CategoryContent_Category">
+          <End Type="OpenAppModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="OpenAppModel.CategoryContent" Role="CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Icon">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="IconUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoryContent" Relationship="OpenAppModel.FK_CategoryContent_Icon" FromRole="Icon" ToRole="CategoryContent" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="OpenAppModel.FK_Category_Schema" FromRole="Schema" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="SchemaContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TitleTag" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DescTag" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UrlTag" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoryContent" Relationship="OpenAppModel.FK_CategoryContent_SchemaContent" FromRole="SchemaContent" ToRole="CategoryContent" />
+        </EntityType>
+        <Association Name="FK_Category_Schema">
+          <End Type="OpenAppModel.Schema" Role="Schema" Multiplicity="0..1" />
+          <End Type="OpenAppModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="SchemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryContent_Icon">
+          <End Type="OpenAppModel.Icon" Role="Icon" Multiplicity="0..1" />
+          <End Type="OpenAppModel.CategoryContent" Role="CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Icon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="IconId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryContent_SchemaContent">
+          <End Type="OpenAppModel.SchemaContent" Role="SchemaContent" Multiplicity="0..1" />
+          <End Type="OpenAppModel.CategoryContent" Role="CategoryContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchemaContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryContent">
+              <PropertyRef Name="SchemaContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OpenAppModelStoreContainer" CdmEntityContainer="OpenAppEntities1">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="OpenAppModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="SchemaId" ColumnName="SchemaId" />
+                <ScalarProperty Name="ApiUrl" ColumnName="ApiUrl" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryContent">
+            <EntityTypeMapping TypeName="OpenAppModel.CategoryContent">
+              <MappingFragment StoreEntitySet="CategoryContent">
+                <ScalarProperty Name="SchemaContentId" ColumnName="SchemaContentId" />
+                <ScalarProperty Name="IconId" ColumnName="IconId" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+                <ScalarProperty Name="ApiUrl" ColumnName="ApiUrl" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Icon">
+            <EntityTypeMapping TypeName="OpenAppModel.Icon">
+              <MappingFragment StoreEntitySet="Icon">
+                <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schema">
+            <EntityTypeMapping TypeName="OpenAppModel.Schema">
+              <MappingFragment StoreEntitySet="Schema">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchemaContent">
+            <EntityTypeMapping TypeName="OpenAppModel.SchemaContent">
+              <MappingFragment StoreEntitySet="SchemaContent">
+                <ScalarProperty Name="UrlTag" ColumnName="UrlTag" />
+                <ScalarProperty Name="DescTag" ColumnName="DescTag" />
+                <ScalarProperty Name="TitleTag" ColumnName="TitleTag" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
